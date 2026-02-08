@@ -53,7 +53,7 @@ export function Sidebar({ data, onChange }: SidebarProps) {
 
   const handleExportJSON = () => {
     downloadJSON(data, 'cv-data.json');
-    toast.success('CV data exported successfully');
+    toast.success('简历数据导出成功');
   };
 
   const handleImportJSON = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,13 +63,13 @@ export function Sidebar({ data, onChange }: SidebarProps) {
     try {
       const importedData = await readJSONFile(file);
       onChange(importedData);
-      toast.success('CV data imported successfully');
+      toast.success('简历数据导入成功');
 
       // Reset the file input
       setImportKey(prev => prev + 1);
     } catch (error) {
       console.error('Error importing JSON:', error);
-      toast.error('Failed to import CV data. Please check the file format.');
+      toast.error('导入失败，请检查文件格式');
     }
   };
 
@@ -77,9 +77,19 @@ export function Sidebar({ data, onChange }: SidebarProps) {
     fileInputRef.current?.click();
   };
 
+  // 中文标签映射
+  const sectionLabels: Record<string, string> = {
+    basicInfo: '基本信息',
+    summary: '个人简介',
+    experiences: '工作经历',
+    education: '教育背景',
+    skills: '专业技能',
+    projects: '项目经历'
+  };
+
   const sections: Section[] = Object.keys(data).filter(key => key !== 'activeTheme' && key !== 'sectionConfig').map(key => ({
     id: key,
-    label: key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()).trim()
+    label: sectionLabels[key] || key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()).trim()
   }))
 
   const Components = {
@@ -106,7 +116,7 @@ export function Sidebar({ data, onChange }: SidebarProps) {
             onClick={triggerImportDialog}
           >
             <Upload className="h-4 w-4" />
-            <span>Import</span>
+            <span>导入</span>
           </Button>
           <input
             ref={fileInputRef}
@@ -151,7 +161,7 @@ export function Sidebar({ data, onChange }: SidebarProps) {
               <AccordionTrigger className="px-4 py-3 hover:bg-gray-100/50 transition-colors">
                 <div className="flex items-center gap-2">
                   <Palette className="h-4 w-4" />
-                  <span>Theme</span>
+                  <span>主题</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="pt-2 px-4 pb-4">
@@ -172,7 +182,7 @@ export function Sidebar({ data, onChange }: SidebarProps) {
               <div className="space-y-2">
                 <div className="flex items-center gap-2 mb-1">
                   <Settings className="h-4 w-4" />
-                  <h3 className="text-sm font-medium">Configuration</h3>
+                  <h3 className="text-sm font-medium">AI 优化</h3>
                 </div>
                 <div className="grid grid-cols-1 gap-3">
                   {/* <ConfigurationPanel cvData={data} onChange={onChange} /> */}
@@ -185,7 +195,7 @@ export function Sidebar({ data, onChange }: SidebarProps) {
               <div className="space-y-2">
                 <div className="flex items-center gap-2 mb-1">
                   <SlidersHorizontal className="h-4 w-4" />
-                  <h3 className="text-sm font-medium">Export</h3>
+                  <h3 className="text-sm font-medium">导出</h3>
                 </div>
 
                 <Button
@@ -194,7 +204,7 @@ export function Sidebar({ data, onChange }: SidebarProps) {
                   onClick={handleExportJSON}
                 >
                   <FileJson className="h-4 w-4" />
-                  <span>Export JSON</span>
+                  <span>导出 JSON</span>
                 </Button>
               </div>
             </div>

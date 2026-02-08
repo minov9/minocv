@@ -6,8 +6,8 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { 
-  FolderKanban, 
+import {
+  FolderKanban,
   Building,
   ListChecks,
   Plus,
@@ -63,9 +63,9 @@ export function Projects({ data, onChange }: ProjectsProps) {
 
   const handleUpdateProject = (id: string, field: keyof ProjectItem, value: any) => {
     onChange(
-      data.map(item => 
-        item.id === id 
-          ? { ...item, [field]: value } 
+      data.map(item =>
+        item.id === id
+          ? { ...item, [field]: value }
           : item
       )
     );
@@ -73,11 +73,11 @@ export function Projects({ data, onChange }: ProjectsProps) {
 
   const handleAddDetail = (id: string) => {
     if (!newDetail.trim()) return;
-    
+
     onChange(
-      data.map(item => 
-        item.id === id 
-          ? { ...item, details: [...item.details, newDetail.trim()] } 
+      data.map(item =>
+        item.id === id
+          ? { ...item, details: [...item.details, newDetail.trim()] }
           : item
       )
     );
@@ -86,12 +86,12 @@ export function Projects({ data, onChange }: ProjectsProps) {
 
   const handleRemoveDetail = (projectId: string, index: number) => {
     onChange(
-      data.map(item => 
-        item.id === projectId 
-          ? { 
-              ...item, 
-              details: item.details.filter((_, i) => i !== index) 
-            } 
+      data.map(item =>
+        item.id === projectId
+          ? {
+            ...item,
+            details: item.details.filter((_, i) => i !== index)
+          }
           : item
       )
     );
@@ -101,46 +101,46 @@ export function Projects({ data, onChange }: ProjectsProps) {
     <div className="space-y-6">
       <div className="space-y-4">
         {data.map((project, index) => (
-          <Card 
+          <Card
             key={project.id}
             className={`bg-white/50 backdrop-blur-sm border shadow-sm transition-all duration-200 ${activeId === project.id ? 'border-primary/30 ring-2 ring-primary/10' : 'border-gray-100 hover:border-gray-200'}`}
           >
             <CardContent className="pt-4">
               <div className="flex justify-between items-center mb-4">
                 <div className="font-medium">
-                  {project.name || 'New Project'} 
-                  {project.company && ` for ${project.company}`}
+                  {project.name || '新项目'}
+                  {project.company && ` @ ${project.company}`}
                 </div>
                 <div className="flex space-x-1">
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     className="h-8 w-8 text-muted-foreground hover:text-foreground"
                     onClick={() => setActiveId(activeId === project.id ? null : project.id)}
                   >
                     <Edit className="h-4 w-4" />
                   </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     className="h-8 w-8 text-muted-foreground hover:text-foreground"
                     onClick={() => handleMoveUp(index)}
                     disabled={index === 0}
                   >
                     <MoveUp className="h-4 w-4" />
                   </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     className="h-8 w-8 text-muted-foreground hover:text-foreground"
                     onClick={() => handleMoveDown(index)}
                     disabled={index === data.length - 1}
                   >
                     <MoveDown className="h-4 w-4" />
                   </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     className="h-8 w-8 text-destructive/70 hover:text-destructive"
                     onClick={() => handleRemoveProject(project.id)}
                   >
@@ -154,13 +154,13 @@ export function Projects({ data, onChange }: ProjectsProps) {
                   <div className="space-y-2">
                     <div className="flex items-center">
                       <FolderKanban className="w-4 h-4 mr-2 text-muted-foreground" />
-                      <Label htmlFor={`name-${project.id}`} className="text-sm font-medium">Project Name</Label>
+                      <Label htmlFor={`name-${project.id}`} className="text-sm font-medium">项目名称</Label>
                     </div>
                     <Input
                       id={`name-${project.id}`}
                       value={project.name}
                       onChange={(e) => handleUpdateProject(project.id, 'name', e.target.value)}
-                      placeholder="Automation Dashboard"
+                      placeholder="电商平台重构"
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/10"
                     />
                   </div>
@@ -168,13 +168,13 @@ export function Projects({ data, onChange }: ProjectsProps) {
                   <div className="space-y-2">
                     <div className="flex items-center">
                       <Building className="w-4 h-4 mr-2 text-muted-foreground" />
-                      <Label htmlFor={`company-${project.id}`} className="text-sm font-medium">Company Name</Label>
+                      <Label htmlFor={`company-${project.id}`} className="text-sm font-medium">公司/客户</Label>
                     </div>
                     <Input
                       id={`company-${project.id}`}
                       value={project.company}
                       onChange={(e) => handleUpdateProject(project.id, 'company', e.target.value)}
-                      placeholder="PepsiCo"
+                      placeholder="某头部电商"
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/10"
                     />
                   </div>
@@ -182,9 +182,9 @@ export function Projects({ data, onChange }: ProjectsProps) {
                   <div className="space-y-2">
                     <div className="flex items-center">
                       <ListChecks className="w-4 h-4 mr-2 text-muted-foreground" />
-                      <Label className="text-sm font-medium">Details</Label>
+                      <Label className="text-sm font-medium">项目详情</Label>
                     </div>
-                    
+
                     <ul className="space-y-2 mt-2">
                       {project.details.map((detail, i) => (
                         <li key={i} className="flex items-start group">
@@ -207,7 +207,7 @@ export function Projects({ data, onChange }: ProjectsProps) {
                         <Textarea
                           value={newDetail}
                           onChange={(e) => setNewDetail(e.target.value)}
-                          placeholder="Add project detail..."
+                          placeholder="添加项目详情..."
                           className="resize-none transition-all duration-200 focus:ring-2 focus:ring-primary/10"
                         />
                       </div>
@@ -217,7 +217,7 @@ export function Projects({ data, onChange }: ProjectsProps) {
                         disabled={!newDetail.trim()}
                         className="flex items-center"
                       >
-                        <Plus className="mr-1 h-4 w-4" /> Add
+                        <Plus className="mr-1 h-4 w-4" /> 添加
                       </Button>
                     </div>
                   </div>
@@ -228,12 +228,12 @@ export function Projects({ data, onChange }: ProjectsProps) {
         ))}
       </div>
 
-      <Button 
-        variant="outline" 
+      <Button
+        variant="outline"
         onClick={handleAddProject}
         className="w-full flex items-center justify-center"
       >
-        <Plus className="mr-2 h-4 w-4" /> Add Project
+        <Plus className="mr-2 h-4 w-4" /> 添加项目
       </Button>
     </div>
   );

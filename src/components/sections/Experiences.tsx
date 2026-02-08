@@ -95,11 +95,11 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
         data.map((item) =>
           item.id === experienceId
             ? {
-                ...item,
-                achievements: item.achievements.map((ach, i) =>
-                  i === editingAchievementIndex ? newAchievement.trim() : ach
-                ),
-              }
+              ...item,
+              achievements: item.achievements.map((ach, i) =>
+                i === editingAchievementIndex ? newAchievement.trim() : ach
+              ),
+            }
             : item
         )
       );
@@ -110,9 +110,9 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
         data.map((item) =>
           item.id === experienceId
             ? {
-                ...item,
-                achievements: [...item.achievements, newAchievement.trim()],
-              }
+              ...item,
+              achievements: [...item.achievements, newAchievement.trim()],
+            }
             : item
         )
       );
@@ -125,9 +125,9 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
       data.map((item) =>
         item.id === experienceId
           ? {
-              ...item,
-              achievements: item.achievements.filter((_, i) => i !== index),
-            }
+            ...item,
+            achievements: item.achievements.filter((_, i) => i !== index),
+          }
           : item
       )
     );
@@ -164,17 +164,16 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
         {data.map((experience, index) => (
           <Card
             key={experience.id}
-            className={`bg-white/50 backdrop-blur-sm border shadow-sm transition-all duration-200 ${
-              activeId === experience.id
+            className={`bg-white/50 backdrop-blur-sm border shadow-sm transition-all duration-200 ${activeId === experience.id
                 ? "border-primary/30 ring-2 ring-primary/10"
                 : "border-gray-100 hover:border-gray-200"
-            }`}
+              }`}
           >
             <CardContent className="pt-4">
               <div className="flex justify-between items-center mb-4">
                 <div className="font-medium">
-                  {experience.role || "New Experience"}{" "}
-                  {experience.company && `at ${experience.company}`}
+                  {experience.role || "新工作经历"}{" "}
+                  {experience.company && `@ ${experience.company}`}
                 </div>
                 <div className="flex space-x-1">
                   <Button
@@ -227,7 +226,7 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
                         htmlFor={`role-${experience.id}`}
                         className="text-sm font-medium"
                       >
-                        Role
+                        职位
                       </Label>
                     </div>
                     <Input
@@ -240,7 +239,7 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
                           e.target.value
                         )
                       }
-                      placeholder="Enter role..."
+                      placeholder="输入职位..."
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/10"
                     />
                   </div>
@@ -252,7 +251,7 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
                         htmlFor={`company-${experience.id}`}
                         className="text-sm font-medium"
                       >
-                        Company Name
+                        公司名称
                       </Label>
                     </div>
                     <Input
@@ -265,7 +264,7 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
                           e.target.value
                         )
                       }
-                      placeholder="Enter company name..."
+                      placeholder="输入公司名称..."
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/10"
                     />
                   </div>
@@ -275,7 +274,7 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
                       <div className="flex items-center">
                         <Calendar className="w-4 h-4 mr-2 text-muted-foreground" />
                         <Label className="text-sm font-medium">
-                          Start Date
+                          开始时间
                         </Label>
                       </div>
                       <Input
@@ -294,7 +293,7 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
                     <div className="space-y-2">
                       <div className="flex items-center">
                         <Calendar className="w-4 h-4 mr-2 text-muted-foreground" />
-                        <Label className="text-sm font-medium">End Date</Label>
+                        <Label className="text-sm font-medium">结束时间</Label>
                       </div>
                       <Input
                         type="month"
@@ -318,14 +317,14 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
                         handleCurrentChange(experience.id, checked as boolean)
                       }
                     />
-                    <Label>I currently work here</Label>
+                    <Label>我目前在此工作</Label>
                   </div>
                   {/* Achievements Section */}
                   <div className="space-y-2">
                     <div className="flex items-center">
                       <ListChecks className="w-4 h-4 mr-2 text-muted-foreground" />
                       <Label className="text-sm font-medium">
-                        Achievements/Tasks
+                        工作成果/职责
                       </Label>
                     </div>
 
@@ -338,11 +337,11 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
                       >
                         {editingAchievementIndex !== null ? (
                           <>
-                            <Edit className="mr-1 h-4 w-4" /> Update
+                            <Edit className="mr-1 h-4 w-4" /> 更新
                           </>
                         ) : (
                           <>
-                            <Plus className="mr-1 h-4 w-4" /> Add
+                            <Plus className="mr-1 h-4 w-4" /> 添加
                           </>
                         )}
                       </Button>
@@ -352,7 +351,7 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
                       <RichTextEditor
                         value={newAchievement}
                         onChange={setNewAchievement}
-                        placeholder="Add achievement or responsibility..."
+                        placeholder="添加工作成果或职责..."
                       />
                     </div>
                     <ul className="space-y-2 mt-2">
@@ -397,7 +396,7 @@ export function Experiences({ data, onChange }: ExperiencesProps) {
         onClick={handleAddExperience}
         className="w-full flex items-center justify-center"
       >
-        <Plus className="mr-2 h-4 w-4" /> Add Experience
+        <Plus className="mr-2 h-4 w-4" /> 添加工作经历
       </Button>
     </div>
   );

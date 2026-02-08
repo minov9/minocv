@@ -17,7 +17,18 @@ function App() {
 
   // Try to load saved state from localStorage
   useEffect(() => {
-    const savedData = localStorage.getItem('cv-data');
+    // 版本检查：如果是旧数据（没有中文标题），则清除并使用默认数据
+    const dataVersion = localStorage.getItem('minocv-version');
+    if (dataVersion !== 'v2-zh') {
+      // 清除旧数据，使用新的中文默认数据
+      localStorage.removeItem('cv-data');
+      localStorage.removeItem('minocv-data');
+      localStorage.setItem('minocv-version', 'v2-zh');
+      setCVData(defaultCVData);
+      return;
+    }
+
+    const savedData = localStorage.getItem('minocv-data');
     if (savedData) {
       try {
         setCVData(JSON.parse(savedData));
@@ -29,7 +40,7 @@ function App() {
 
   // Save state to localStorage when it changes
   useEffect(() => {
-    localStorage.setItem('cv-data', JSON.stringify(cvData));
+    localStorage.setItem('minocv-data', JSON.stringify(cvData));
   }, [cvData]);
 
   if (isMobile) {
@@ -42,8 +53,8 @@ function App() {
             <div className="p-4 border-b bg-white/90 backdrop-blur-md sticky top-0 z-10 shadow-sm">
               <h1 className="text-2xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600">MinoCV</h1>
               <TabsList className="grid grid-cols-2 w-full">
-                <TabsTrigger value="edit" className="transition-all">Edit</TabsTrigger>
-                <TabsTrigger value="preview" className="transition-all">Preview</TabsTrigger>
+                <TabsTrigger value="edit" className="transition-all">编辑</TabsTrigger>
+                <TabsTrigger value="preview" className="transition-all">预览</TabsTrigger>
               </TabsList>
             </div>
 

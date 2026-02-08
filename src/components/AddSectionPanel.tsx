@@ -42,7 +42,7 @@ export function AddSection({ cvData, onChange }: ConfigurationPanelProps) {
         order: [...cvData.sectionConfig.order, newSectionKey],
       }
     })
-    toast.success('CV configuration applied successfully');
+    toast.success('简历配置已成功应用');
     setOpen(false);
     setSectionConfig({ visibility: true, title: '' });
   };
@@ -52,38 +52,38 @@ export function AddSection({ cvData, onChange }: ConfigurationPanelProps) {
       <DialogTrigger asChild>
         <Button variant="link">
           <BookUp className="h-4 w-4" />
-          <span>Add New Section</span>
+          <span>添加新板块</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Add New Section</DialogTitle>
+          <DialogTitle>添加新板块</DialogTitle>
           <DialogDescription>
-            The new section will appear next to the other sections like Skills
+            新板块将与其他板块（如技能）一起显示
           </DialogDescription>
         </DialogHeader>
         <div className="py-4 space-y-6 max-h-[60vh] overflow-y-auto">
           <div className="space-y-4">
-            <h3 className="text-sm font-medium">Section Title</h3>
+            <h3 className="text-sm font-medium">板块标题</h3>
             <div className="flex items-center gap-3 p-3">
               <div className="flex-1 space-y-2">
-                  <Input
-                    id={`new-title`}
-                    value={sectionConfig.title}
-                    onChange={(e) => setSectionConfig((prev) => ({ ...prev, title: e.target.value }))}
-                    placeholder={'Section Title'}
-                    className="h-8 text-md"
-                  />
+                <Input
+                  id={`new-title`}
+                  value={sectionConfig.title}
+                  onChange={(e) => setSectionConfig((prev) => ({ ...prev, title: e.target.value }))}
+                  placeholder={'板块标题'}
+                  className="h-8 text-md"
+                />
               </div>
             </div>
           </div>
         </div>
         <DialogFooter>
           <Button type="button" variant="outline" onClick={() => setOpen(false)}>
-            Cancel
+            取消
           </Button>
           <Button type="button" onClick={handleApplyChanges}>
-            Apply Changes
+            应用更改
           </Button>
         </DialogFooter>
       </DialogContent>

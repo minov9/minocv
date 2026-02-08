@@ -38,7 +38,7 @@ export function PhotoUpload({ basicInfo, onChange }: PhotoUploadProps) {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    
+
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       processImage(e.dataTransfer.files[0]);
     }
@@ -47,13 +47,13 @@ export function PhotoUpload({ basicInfo, onChange }: PhotoUploadProps) {
   const processImage = (file: File) => {
     // Check file type
     if (!file.type.startsWith('image/')) {
-      toast.error('Please upload an image file');
+      toast.error('请上传图片文件');
       return;
     }
 
     // Check file size (limit to 2MB)
     if (file.size > 2 * 1024 * 1024) {
-      toast.error('Image size should be less than 2MB');
+      toast.error('图片大小不能超过 2MB');
       return;
     }
 
@@ -61,40 +61,39 @@ export function PhotoUpload({ basicInfo, onChange }: PhotoUploadProps) {
     reader.onload = (e) => {
       const base64Data = e.target?.result as string;
       onChange({ ...basicInfo, photo: base64Data });
-      toast.success('Photo uploaded successfully');
+      toast.success('照片上传成功');
     };
     reader.onerror = () => {
-      toast.error('Failed to read the image file');
+      toast.error('图片读取失败');
     };
     reader.readAsDataURL(file);
   };
 
   const handleRemovePhoto = () => {
     onChange({ ...basicInfo, photo: undefined });
-    toast.success('Photo removed');
+    toast.success('照片已移除');
   };
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium">Profile Photo</h3>
+        <h3 className="text-sm font-medium">个人照片</h3>
         {basicInfo.photo && (
-          <Button 
-            variant="ghost" 
-            size="sm" 
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={handleRemovePhoto}
             className="h-8 px-2 text-xs text-red-500 hover:text-red-600 hover:bg-red-50"
           >
             <X className="h-3.5 w-3.5 mr-1" />
-            Remove
+            移除
           </Button>
         )}
       </div>
 
-      <div 
-        className={`relative rounded-lg border-2 border-dashed p-4 transition-all ${
-          dragActive ? 'border-primary bg-primary/5' : 'border-gray-200'
-        }`}
+      <div
+        className={`relative rounded-lg border-2 border-dashed p-4 transition-all ${dragActive ? 'border-primary bg-primary/5' : 'border-gray-200'
+          }`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -106,7 +105,7 @@ export function PhotoUpload({ basicInfo, onChange }: PhotoUploadProps) {
                 <AvatarImage src={basicInfo.photo} alt={basicInfo.name} />
                 <AvatarFallback>{basicInfo.name.substring(0, 2).toUpperCase()}</AvatarFallback>
               </Avatar>
-              <div 
+              <div
                 className="absolute inset-0 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer"
                 onClick={() => fileInputRef.current?.click()}
               >
@@ -118,23 +117,23 @@ export function PhotoUpload({ basicInfo, onChange }: PhotoUploadProps) {
               <User className="h-10 w-10 text-gray-400" />
             </Avatar>
           )}
-          
+
           <div className="space-y-2">
             <h4 className="text-sm font-medium">
-              {basicInfo.photo ? 'Change photo' : 'Upload a photo'}
+              {basicInfo.photo ? '更换照片' : '上传照片'}
             </h4>
             <p className="text-xs text-gray-500">
-              Drag and drop or click to upload
+              拖拽或点击上传
             </p>
-            <Button 
-              type="button" 
-              variant="outline" 
-              size="sm" 
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
               className="mt-2"
               onClick={() => fileInputRef.current?.click()}
             >
               <Upload className="h-3.5 w-3.5 mr-1" />
-              <span>Browse</span>
+              <span>浏览</span>
             </Button>
           </div>
           <input
@@ -147,7 +146,7 @@ export function PhotoUpload({ basicInfo, onChange }: PhotoUploadProps) {
         </div>
       </div>
       <p className="text-xs text-gray-500">
-        Recommended: Square image, max 2MB. Your photo will enhance your CV's personal touch.
+        建议：正方形图片，最大 2MB。照片能让你的简历更加个性化。
       </p>
     </div>
   );

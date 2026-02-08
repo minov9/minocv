@@ -1,5 +1,21 @@
 
 import { useState } from 'react';
+
+declare global {
+  interface Window {
+    html2pdf: () => {
+      set: (opt: unknown) => {
+        from: (element: HTMLElement) => {
+          toPdf: () => {
+            get: (type: string) => {
+              then: (callback: (pdf: { save: () => void }) => void) => Promise<void>;
+            };
+          };
+        };
+      };
+    };
+  }
+}
 import { Button } from '@/components/ui/button';
 import { FileText, Printer } from 'lucide-react';
 import { CVData } from '@/lib/types';
@@ -41,23 +57,23 @@ export function DownloadOptions({ cvData }: DownloadOptionsProps) {
       const htmlContent = generateHtmlContent();
       const blob = new Blob([htmlContent], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
-      
+
       const a = document.createElement('a');
       a.href = url;
       a.download = `${cvData.basicInfo.name.replace(/\s+/g, '-')}-${cvData.basicInfo.role.replace(/\s+/g, '-')}-CV.html`;
       document.body.appendChild(a);
       a.click();
-      
+
       setTimeout(() => {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
         setIsGenerating(false);
       }, 100);
-      
-      toast.success('CV exported as HTML successfully');
+
+      toast.success('简历已导出为 HTML');
     } catch (error) {
       console.error('Error exporting HTML:', error);
-      toast.error('Failed to export HTML');
+      toast.error('HTML 导出失败');
       setIsGenerating(false);
     }
   };
@@ -66,16 +82,16 @@ export function DownloadOptions({ cvData }: DownloadOptionsProps) {
     try {
       setIsGenerating(true);
       const printWindow = window.open('', '_blank');
-      
+
       if (!printWindow) {
-        toast.error('Please allow popups to print your CV');
+        toast.error('请允许弹出窗口以打印简历');
         setIsGenerating(false);
         return;
       }
 
       printWindow.document.write(generateHtmlContent());
       printWindow.document.close();
-      
+
       // Wait for resources to load then print
       printWindow.onload = () => {
         try {
@@ -84,13 +100,13 @@ export function DownloadOptions({ cvData }: DownloadOptionsProps) {
           setIsGenerating(false);
         } catch (error) {
           console.error('Error during print:', error);
-          toast.error('Failed to open print dialog');
+          toast.error('打开打印对话框失败');
           setIsGenerating(false);
         }
       };
     } catch (error) {
       console.error('Error opening print preview:', error);
-      toast.error('Failed to generate print preview');
+      toast.error('生成打印预览失败');
       setIsGenerating(false);
     }
   };
@@ -109,18 +125,18 @@ export function DownloadOptions({ cvData }: DownloadOptionsProps) {
 
     const element = document.getElementById('cv-preview');
 
-      const opt = {
-        margin: 0.5,
-        filename: 'tailwind_page.pdf',
-        html2canvas: { scale: 2, useCORS: true }, // html2canvas is optional here; we bypass it for text
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-      };
+    const opt = {
+      margin: 0.5,
+      filename: 'tailwind_page.pdf',
+      html2canvas: { scale: 2, useCORS: true }, // html2canvas is optional here; we bypass it for text
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    };
 
-      // Generate PDF directly from HTML/CSS
-      await window.html2pdf().set(opt).from(element).toPdf().get('pdf').then((pdf) => {
-        pdf.save();
-      });
+    // Generate PDF directly from HTML/CSS
+    await window.html2pdf().set(opt).from(element).toPdf().get('pdf').then((pdf) => {
+      pdf.save();
+    });
   }
 
   return (
@@ -128,10 +144,10 @@ export function DownloadOptions({ cvData }: DownloadOptionsProps) {
       <div className="space-y-2">
         <h3 className="text-sm font-medium flex items-center gap-2">
           <FileText className="h-4 w-4" />
-          Download Options
+          下载选项
         </h3>
         <p className="text-xs text-muted-foreground">
-          Export your CV in different formats for sharing or printing
+          导出你的简历为不同格式，方便分享或打印
         </p>
       </div>
 
@@ -143,7 +159,7 @@ export function DownloadOptions({ cvData }: DownloadOptionsProps) {
           disabled={isGenerating}
         >
           <FileText className="h-4 w-4" />
-          <span>Export HTML</span>
+          <span>导出 HTML</span>
         </Button>
 
         <Button
@@ -153,7 +169,7 @@ export function DownloadOptions({ cvData }: DownloadOptionsProps) {
           disabled={isGenerating}
         >
           <Printer className="h-4 w-4" />
-          <span>Print</span>
+          <span>打印</span>
         </Button>
 
         {/* <Button

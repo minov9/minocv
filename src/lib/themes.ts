@@ -3,7 +3,7 @@ import { ThemeConfig, ThemeType } from './types';
 export const themes: Record<ThemeType, ThemeConfig> = {
   basic: {
     id: 'basic',
-    name: 'Basic',
+    name: '基础',
     color: 'text-gray-700',
     fontClass: 'font-sans',
     spacing: 'p-4',
@@ -14,7 +14,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   casual: {
     id: 'casual',
-    name: 'Casual',
+    name: '休闲',
     color: 'text-green-500',
     fontClass: 'font-sans',
     spacing: 'p-5',
@@ -25,7 +25,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   professional: {
     id: 'professional',
-    name: 'Professional',
+    name: '专业',
     color: 'text-blue-500',
     fontClass: 'font-serif',
     spacing: 'p-6',
@@ -41,7 +41,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   creative: {
     id: 'creative',
-    name: 'Creative',
+    name: '创意',
     color: 'text-pink-500',
     fontClass: 'font-sans',
     spacing: 'space-y-8',
@@ -57,7 +57,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   modern: {
     id: 'modern',
-    name: 'Modern',
+    name: '现代',
     color: 'text-purple-600',
     fontClass: 'font-sans',
     spacing: 'space-y-7',
@@ -73,7 +73,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   business: {
     id: 'business',
-    name: 'Business',
+    name: '商务',
     color: 'text-orange-500',
     fontClass: 'font-serif',
     spacing: 'space-y-5',
@@ -89,7 +89,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   minimal: {
     id: 'minimal',
-    name: 'Minimal',
+    name: '极简',
     color: 'text-slate-800',
     fontClass: 'font-sans',
     spacing: 'space-y-5',
@@ -104,7 +104,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   elegant: {
     id: 'elegant',
-    name: 'Elegant',
+    name: '优雅',
     color: 'text-emerald-700',
     fontClass: 'font-serif',
     spacing: 'space-y-6',
@@ -120,7 +120,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   technical: {
     id: 'technical',
-    name: 'Technical',
+    name: '技术',
     color: 'text-sky-700',
     fontClass: 'font-mono',
     spacing: 'space-y-5',
@@ -135,7 +135,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   vibrant: {
     id: 'vibrant',
-    name: 'Vibrant',
+    name: '活力',
     color: 'text-fuchsia-600',
     fontClass: 'font-sans',
     spacing: 'space-y-6',
@@ -150,7 +150,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   nordic: {
     id: 'nordic',
-    name: 'Nordic',
+    name: '北欧',
     color: 'text-slate-700',
     fontClass: 'font-sans',
     spacing: 'space-y-6',
@@ -166,7 +166,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   blueprint: {
     id: 'blueprint',
-    name: 'Blueprint',
+    name: '蓝图',
     color: 'text-blue-900',
     fontClass: 'font-mono',
     spacing: 'space-y-6',
@@ -182,7 +182,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   gradient: {
     id: 'gradient',
-    name: 'Gradient',
+    name: '渐变',
     color: 'text-indigo-600',
     fontClass: 'font-sans',
     spacing: 'space-y-7',
@@ -198,7 +198,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   retro: {
     id: 'retro',
-    name: 'Retro',
+    name: '复古',
     color: 'text-amber-700',
     fontClass: 'font-mono',
     spacing: 'space-y-6',
@@ -211,10 +211,10 @@ export const themes: Record<ThemeType, ThemeConfig> = {
     imagePlacement: 'left',
     imageStyle: 'w-28 h-28 p-1 border-2 border-amber-700 mr-4 grayscale sepia',
     preview: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmZmYmViIi8+PHJlY3QgeD0iMTAiIHk9IjIwIiB3aWR0aD0iMjUiIGhlaWdodD0iMjUiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2I0NWMwOSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iNDUiIHk9IjMwIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2I0NWMwOSI+UkVUUk88L3RleHQ+PGxpbmUgeDE9IjEwIiB5MT0iMzUiIHgyPSI5MCIgeTI9IjM1IiBzdHJva2U9IiNiNDVjMDkiIHN0cm9rZS13aWR0aD0iMyIvPjxyZWN0IHg9IjEwIiB5PSI0NSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjZmRlNjhhIiBzdHJva2U9IiNiNDVjMDkiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IHg9IjE1IiB5PSI1MiIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSI2IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2I0NWMwOSI+U0VDVElPTjwvdGV4dD48cmVjdCB4PSIxMCIgeT0iNjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIzMCIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSIjZmRlNjhhIiBzdHJva2Utd2lkdGg9IjIiLz48L3N2Zz4='
-  }, 
+  },
   academic: {
     id: 'academic',
-    name: 'Academic',
+    name: '学术',
     color: 'text-indigo-800',
     fontClass: 'font-serif',
     spacing: 'space-y-7',
@@ -229,7 +229,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   corporate: {
     id: 'corporate',
-    name: 'Corporate',
+    name: '企业',
     color: 'text-gray-700',
     fontClass: 'font-sans',
     spacing: 'space-y-5',
@@ -245,7 +245,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   artistic: {
     id: 'artistic',
-    name: 'Artistic',
+    name: '艺术',
     color: 'text-rose-600',
     fontClass: 'font-sans',
     spacing: 'space-y-6',
@@ -261,7 +261,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   classic: {
     id: 'classic',
-    name: 'Classic',
+    name: '经典',
     color: 'text-stone-700',
     fontClass: 'font-serif',
     spacing: 'space-y-5',
@@ -277,7 +277,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   digital: {
     id: 'digital',
-    name: 'Digital',
+    name: '数字',
     color: 'text-cyan-600',
     fontClass: 'font-sans',
     spacing: 'space-y-6',
@@ -293,7 +293,7 @@ export const themes: Record<ThemeType, ThemeConfig> = {
   },
   futuristic: {
     id: 'futuristic',
-    name: 'Futuristic',
+    name: '未来',
     color: 'text-violet-600',
     fontClass: 'font-sans',
     spacing: 'space-y-7',

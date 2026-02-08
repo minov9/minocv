@@ -29,7 +29,7 @@ export function TailorCVDialog({ cvData, onTailored }: TailorCVDialogProps) {
     e.preventDefault();
 
     if (!jobTitle.trim() || !jobDescription.trim()) {
-      toast.error('Please fill in both fields');
+      toast.error('请填写所有字段');
       return;
     }
 
@@ -106,11 +106,11 @@ export function TailorCVDialog({ cvData, onTailored }: TailorCVDialogProps) {
       if (photo) tailoredCV.basicInfo.photo = photo;
 
       onTailored(tailoredCV);
-      toast.success('CV successfully tailored for the job description!');
+      toast.success('简历已根据岗位描述优化完成！');
       setOpen(false);
     } catch (error) {
       console.error('Error tailoring CV:', error);
-      toast.error('Failed to tailor CV. Please try again or check your API key.');
+      toast.error('优化失败，请重试或检查 API Key');
     } finally {
       setLoading(false);
     }
@@ -121,20 +121,20 @@ export function TailorCVDialog({ cvData, onTailored }: TailorCVDialogProps) {
       <DialogTrigger asChild>
         <Button variant="outline" className="flex items-center gap-2">
           <Wand2 className="h-4 w-4" />
-          <span>Tailor for Job Description</span>
+          <span>根据岗位描述优化</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
-          <DialogTitle>Tailor Your CV</DialogTitle>
+          <DialogTitle>智能优化简历</DialogTitle>
           <DialogDescription>
-            Enter the job title and description to optimize your CV for this specific application.
+            输入目标岗位和职位描述，AI 将帮你优化简历内容以更好地匹配该岗位。
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4 py-4">
           <div className="space-y-2">
             <Label htmlFor="job-title" className="text-sm font-medium">
-              OpenAI API Key (More details on <a className="text-blue-500" href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key" target="_blank">OpenAI</a>)
+              OpenAI API Key（获取方式见 <a className="text-blue-500" href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key" target="_blank">OpenAI 官网</a>）
             </Label>
             <Input
               id="job-title"
@@ -147,44 +147,44 @@ export function TailorCVDialog({ cvData, onTailored }: TailorCVDialogProps) {
           </div>
           <div className="space-y-2">
             <Label htmlFor="job-title" className="text-sm font-medium">
-              Job Title
+              目标岗位
             </Label>
             <Input
               id="job-title"
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
-              placeholder="Senior Frontend Developer"
+              placeholder="高级前端工程师"
               disabled={loading}
               className="transition-all duration-200 focus:ring-2 focus:ring-primary/10"
             />
           </div>
           <div className="space-y-2">
             <Label htmlFor="job-description" className="text-sm font-medium">
-              Job Description
+              职位描述
             </Label>
             <Textarea
               id="job-description"
               value={jobDescription}
               onChange={(e) => setJobDescription(e.target.value)}
-              placeholder="Paste the full job description here..."
+              placeholder="粘贴完整的职位描述..."
               className="min-h-[200px] resize-y transition-all duration-200 focus:ring-2 focus:ring-primary/10"
               disabled={loading}
             />
           </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => setOpen(false)} disabled={loading}>
-              Cancel
+              取消
             </Button>
             <Button type="submit" disabled={loading || !jobTitle.trim() || !jobDescription.trim()}>
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Tailoring...
+                  优化中...
                 </>
               ) : (
                 <>
                   <Wand2 className="mr-2 h-4 w-4" />
-                  Tailor CV
+                  开始优化
                 </>
               )}
             </Button>

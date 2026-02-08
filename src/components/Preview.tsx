@@ -29,11 +29,11 @@ export function Preview({ data }: PreviewProps) {
   };
 
   const titles = data.sectionConfig?.titles || {
-    summary: "Summary",
-    experiences: "Experience",
-    education: "Education",
-    skills: "Skills",
-    projects: "Projects",
+    summary: "个人简介",
+    experiences: "工作经历",
+    education: "教育背景",
+    skills: "专业技能",
+    projects: "项目经历",
   };
 
   const order = data.sectionConfig?.order || [
@@ -256,7 +256,7 @@ export function Preview({ data }: PreviewProps) {
                     <Calendar className="h-3 w-3" />
                     <span>
                       {formatDate(exp.startDate)} -{" "}
-                      {exp.current ? "Present" : formatDate(exp.endDate)}
+                      {exp.current ? "至今" : formatDate(exp.endDate)}
                     </span>
                   </div>
                 </div>
@@ -305,7 +305,7 @@ export function Preview({ data }: PreviewProps) {
                       <Calendar className="h-3 w-3" />
                       <span>
                         {formatDate(edu.startDate)} -{" "}
-                        {edu.current ? "Present" : formatDate(edu.endDate)}
+                        {edu.current ? "至今" : formatDate(edu.endDate)}
                       </span>
                     </div>
                   )}

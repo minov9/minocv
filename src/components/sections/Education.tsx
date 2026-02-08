@@ -6,9 +6,9 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import { 
-  GraduationCap, 
-  Building, 
+import {
+  GraduationCap,
+  Building,
   MapPin,
   Calendar,
   Plus,
@@ -65,9 +65,9 @@ export function Education({ data, onChange }: EducationProps) {
 
   const handleUpdateEducation = (id: string, field: keyof EducationItem, value: any) => {
     onChange(
-      data.map(item => 
-        item.id === id 
-          ? { ...item, [field]: value } 
+      data.map(item =>
+        item.id === id
+          ? { ...item, [field]: value }
           : item
       )
     );
@@ -75,9 +75,9 @@ export function Education({ data, onChange }: EducationProps) {
 
   const handleCurrentChange = (id: string, checked: boolean) => {
     onChange(
-      data.map(item => 
-        item.id === id 
-          ? { ...item, current: checked, endDate: checked ? '' : item.endDate } 
+      data.map(item =>
+        item.id === id
+          ? { ...item, current: checked, endDate: checked ? '' : item.endDate }
           : item
       )
     );
@@ -87,46 +87,46 @@ export function Education({ data, onChange }: EducationProps) {
     <div className="space-y-6">
       <div className="space-y-4">
         {data.map((education, index) => (
-          <Card 
+          <Card
             key={education.id}
             className={`bg-white/50 backdrop-blur-sm border shadow-sm transition-all duration-200 ${activeId === education.id ? 'border-primary/30 ring-2 ring-primary/10' : 'border-gray-100 hover:border-gray-200'}`}
           >
             <CardContent className="pt-4">
               <div className="flex justify-between items-center mb-4">
                 <div className="font-medium">
-                  {education.degree || 'New Education'} 
-                  {education.institute && ` at ${education.institute}`}
+                  {education.degree || '新教育背景'}
+                  {education.institute && ` @ ${education.institute}`}
                 </div>
                 <div className="flex space-x-1">
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     className="h-8 w-8 text-muted-foreground hover:text-foreground"
                     onClick={() => setActiveId(activeId === education.id ? null : education.id)}
                   >
                     <Edit className="h-4 w-4" />
                   </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     className="h-8 w-8 text-muted-foreground hover:text-foreground"
                     onClick={() => handleMoveUp(index)}
                     disabled={index === 0}
                   >
                     <MoveUp className="h-4 w-4" />
                   </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     className="h-8 w-8 text-muted-foreground hover:text-foreground"
                     onClick={() => handleMoveDown(index)}
                     disabled={index === data.length - 1}
                   >
                     <MoveDown className="h-4 w-4" />
                   </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     className="h-8 w-8 text-destructive/70 hover:text-destructive"
                     onClick={() => handleRemoveEducation(education.id)}
                   >
@@ -140,13 +140,13 @@ export function Education({ data, onChange }: EducationProps) {
                   <div className="space-y-2">
                     <div className="flex items-center">
                       <GraduationCap className="w-4 h-4 mr-2 text-muted-foreground" />
-                      <Label htmlFor={`degree-${education.id}`} className="text-sm font-medium">Degree</Label>
+                      <Label htmlFor={`degree-${education.id}`} className="text-sm font-medium">学历/学位</Label>
                     </div>
                     <Input
                       id={`degree-${education.id}`}
                       value={education.degree}
                       onChange={(e) => handleUpdateEducation(education.id, 'degree', e.target.value)}
-                      placeholder="Bachelor's Degree in Computer Science"
+                      placeholder="计算机科学与技术 硕士"
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/10"
                     />
                   </div>
@@ -154,13 +154,13 @@ export function Education({ data, onChange }: EducationProps) {
                   <div className="space-y-2">
                     <div className="flex items-center">
                       <Building className="w-4 h-4 mr-2 text-muted-foreground" />
-                      <Label htmlFor={`institute-${education.id}`} className="text-sm font-medium">Institute Name</Label>
+                      <Label htmlFor={`institute-${education.id}`} className="text-sm font-medium">学校名称</Label>
                     </div>
                     <Input
                       id={`institute-${education.id}`}
                       value={education.institute}
                       onChange={(e) => handleUpdateEducation(education.id, 'institute', e.target.value)}
-                      placeholder="Institute of Business and Management Science"
+                      placeholder="北京大学"
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/10"
                     />
                   </div>
@@ -168,13 +168,13 @@ export function Education({ data, onChange }: EducationProps) {
                   <div className="space-y-2">
                     <div className="flex items-center">
                       <MapPin className="w-4 h-4 mr-2 text-muted-foreground" />
-                      <Label htmlFor={`location-${education.id}`} className="text-sm font-medium">Location</Label>
+                      <Label htmlFor={`location-${education.id}`} className="text-sm font-medium">地点</Label>
                     </div>
                     <Input
                       id={`location-${education.id}`}
                       value={education.location}
                       onChange={(e) => handleUpdateEducation(education.id, 'location', e.target.value)}
-                      placeholder="Peshawar, Pakistan"
+                      placeholder="北京"
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/10"
                     />
                   </div>
@@ -183,7 +183,7 @@ export function Education({ data, onChange }: EducationProps) {
                     <div className="space-y-2">
                       <div className="flex items-center">
                         <Calendar className="w-4 h-4 mr-2 text-muted-foreground" />
-                        <Label htmlFor={`startDate-${education.id}`} className="text-sm font-medium">Start Date</Label>
+                        <Label htmlFor={`startDate-${education.id}`} className="text-sm font-medium">开始时间</Label>
                       </div>
                       <Input
                         id={`startDate-${education.id}`}
@@ -197,7 +197,7 @@ export function Education({ data, onChange }: EducationProps) {
                     <div className="space-y-2">
                       <div className="flex items-center">
                         <Calendar className="w-4 h-4 mr-2 text-muted-foreground" />
-                        <Label htmlFor={`endDate-${education.id}`} className="text-sm font-medium">End Date</Label>
+                        <Label htmlFor={`endDate-${education.id}`} className="text-sm font-medium">结束时间</Label>
                       </div>
                       <Input
                         id={`endDate-${education.id}`}
@@ -211,13 +211,13 @@ export function Education({ data, onChange }: EducationProps) {
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <Checkbox 
+                    <Checkbox
                       id={`current-${education.id}`}
                       checked={education.current || false}
                       onCheckedChange={(checked) => handleCurrentChange(education.id, checked as boolean)}
                     />
                     <Label htmlFor={`current-${education.id}`} className="text-sm font-medium">
-                      I am currently studying here
+                      我目前在此就读
                     </Label>
                   </div>
                 </div>
@@ -227,12 +227,12 @@ export function Education({ data, onChange }: EducationProps) {
         ))}
       </div>
 
-      <Button 
-        variant="outline" 
+      <Button
+        variant="outline"
         onClick={handleAddEducation}
         className="w-full flex items-center justify-center"
       >
-        <Plus className="mr-2 h-4 w-4" /> Add Education
+        <Plus className="mr-2 h-4 w-4" /> 添加教育背景
       </Button>
     </div>
   );

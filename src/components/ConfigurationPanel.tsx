@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { 
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -24,7 +24,17 @@ interface ConfigurationPanelProps {
 
 export function ConfigurationPanel({ cvData, onChange }: ConfigurationPanelProps) {
   const [open, setOpen] = useState(false);
-  
+
+  // 中文标签映射
+  const sectionLabels: Record<string, string> = {
+    basicInfo: '基本信息',
+    summary: '个人简介',
+    experiences: '工作经历',
+    education: '教育背景',
+    skills: '专业技能',
+    projects: '项目经历',
+  };
+
   const defaultSectionConfig: SectionConfig = {
     visibility: {
       basicInfo: true,
@@ -35,11 +45,11 @@ export function ConfigurationPanel({ cvData, onChange }: ConfigurationPanelProps
       projects: true
     },
     titles: {
-      summary: 'Summary',
-      experiences: 'Experience',
-      education: 'Education',
-      skills: 'Skills',
-      projects: 'Projects'
+      summary: '个人简介',
+      experiences: '工作经历',
+      education: '教育背景',
+      skills: '专业技能',
+      projects: '项目经历'
     },
     order: ['summary', 'experiences', 'education', 'skills', 'projects']
   };
@@ -76,16 +86,16 @@ export function ConfigurationPanel({ cvData, onChange }: ConfigurationPanelProps
   };
 
   const handleRemoveSection = (section: string) => {
-      const newSectionConfig = { ...sectionConfig };
-      delete newSectionConfig.visibility[section];
-      delete newSectionConfig.titles[section];
-      newSectionConfig.order = newSectionConfig.order.filter(item => item !== section);
-      const newCvData = { ...cvData };
-      delete newCvData[section];
-      onChange({
-        ...newCvData,
-        sectionConfig: newSectionConfig
-      });
+    const newSectionConfig = { ...sectionConfig };
+    delete newSectionConfig.visibility[section];
+    delete newSectionConfig.titles[section];
+    newSectionConfig.order = newSectionConfig.order.filter(item => item !== section);
+    const newCvData = { ...cvData };
+    delete newCvData[section];
+    onChange({
+      ...newCvData,
+      sectionConfig: newSectionConfig
+    });
   };
 
   const moveSection = (index: number, direction: 'up' | 'down') => {
@@ -106,7 +116,7 @@ export function ConfigurationPanel({ cvData, onChange }: ConfigurationPanelProps
       ...cvData,
       sectionConfig
     });
-    toast.success('CV configuration applied successfully');
+    toast.success('简历配置已成功应用');
     setOpen(false);
   };
 
@@ -124,22 +134,22 @@ export function ConfigurationPanel({ cvData, onChange }: ConfigurationPanelProps
       <DialogTrigger asChild>
         <Button variant="link">
           <Settings className="h-4 w-4" />
-          <span>Configure Sections</span>
+          <span>配置板块</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Configure CV Sections</DialogTitle>
+          <DialogTitle>配置简历板块</DialogTitle>
           <DialogDescription>
-            Customize visibility, titles, and order of your CV sections.
+            自定义简历板块的可见性、标题和顺序
           </DialogDescription>
         </DialogHeader>
         <div className="py-4 space-y-6 max-h-[60vh] overflow-y-auto">
           <div className="space-y-4">
-            <h3 className="text-sm font-medium">Section Order & Visibility</h3>
+            <h3 className="text-sm font-medium">板块顺序与可见性</h3>
             <div className="grid gap-4">
               {sectionConfig.order.map((sectionKey, index) => (
-                <div 
+                <div
                   key={sectionKey}
                   className="flex items-center gap-3 p-3 bg-gray-50 rounded-md border"
                 >
@@ -149,36 +159,36 @@ export function ConfigurationPanel({ cvData, onChange }: ConfigurationPanelProps
                   <div className="flex-1 space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
-                        <Checkbox 
+                        <Checkbox
                           id={`${sectionKey}-section`}
                           checked={sectionConfig.visibility[sectionKey]}
                           onCheckedChange={() => handleToggleSection(sectionKey)}
                         />
-                        <Label htmlFor={`${sectionKey}-section`} className="font-medium capitalize">
-                          {sectionKey}
+                        <Label htmlFor={`${sectionKey}-section`} className="font-medium">
+                          {sectionLabels[sectionKey] || sectionKey}
                         </Label>
                       </div>
                       <div className="flex items-center space-x-1">
-                        {showDeleteButton(sectionKey) && <Button 
-                          variant="ghost" 
-                          size="sm" 
+                        {showDeleteButton(sectionKey) && <Button
+                          variant="ghost"
+                          size="sm"
                           onClick={() => handleRemoveSection(sectionKey)}
                           className="h-8 w-8 p-0"
                         >
                           <Trash2Icon color='red' className="h-4 w-4" />
                         </Button>}
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
+                        <Button
+                          variant="ghost"
+                          size="sm"
                           onClick={() => moveSection(index, 'up')}
                           disabled={index === 0}
                           className="h-8 w-8 p-0"
                         >
                           <MoveUp className="h-4 w-4" />
                         </Button>
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
+                        <Button
+                          variant="ghost"
+                          size="sm"
                           onClick={() => moveSection(index, 'down')}
                           disabled={index === sectionConfig.order.length - 1}
                           className="h-8 w-8 p-0"
@@ -204,10 +214,10 @@ export function ConfigurationPanel({ cvData, onChange }: ConfigurationPanelProps
         </div>
         <DialogFooter>
           <Button type="button" variant="outline" onClick={() => setOpen(false)}>
-            Cancel
+            取消
           </Button>
           <Button type="button" onClick={handleApplyChanges}>
-            Apply Changes
+            应用更改
           </Button>
         </DialogFooter>
       </DialogContent>
